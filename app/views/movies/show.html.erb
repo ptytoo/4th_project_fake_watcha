@@ -1,0 +1,29 @@
+
+<p>
+  <strong>Poster:</strong>
+  <%= image_tag @movie.image_url, height: "200" %>
+</p>
+<p>
+  <strong>Title:</strong>
+  <%= @movie.title %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @movie.desc %>
+</p>
+
+평점 평균 : <%= @movie.reviews.average(:rating).ceil(2)%>
+<%=form_tag("/movies/#{@movie.id}/reviews",method: :get) do%>
+  <%= render '/movies/star_rating' %>
+  <%= text_field_tag(:comment)%>
+  <%= submit_tag('등록')%>
+<%end%>
+
+<% @movie.reviews.each do |review|%>
+  <p>별점 : <%= review.rating%></p>
+  <p>리뷰 : <%= review.comment%></p>
+<% end %>
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
