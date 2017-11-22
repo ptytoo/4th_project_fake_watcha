@@ -1,0 +1,56 @@
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">유저 관리 </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">영화 관리<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">게시판 관리</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">블로그 관리</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <main role="main" style="margin-left: 250px;">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">영화 관리 페이지</h1>
+          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <p>
+            <a href="#" class="btn btn-primary">Main call to action</a>
+            <a href="#" class="btn btn-secondary">Secondary action</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="album text-muted">
+        <div class="container">
+
+          <div class="row">
+            <!--card를 for로 반복시키면 된다.-->
+            <% @movies.each do |movie| %>
+            <div class="col-sm-4 col-lg-3 col-xs-6">
+              <div class="card" style="width: 15rem;">
+                <img class="card-img-top" src="<%= movie.image_url%>" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title"><%= movie.title %></h4>
+                  <p class="card-text"><%= movie.user.email if movie.user%></p>
+                  <%= link_to '보기', admin_movie_path(movie), class: "btn btn-primary"%>
+                  <!--<a href="#" class="btn btn-primary">보기</a>-->
+                </div>
+              </div>
+              <br>
+            </div>
+            <%end%>
+          </div>
+
+        </div>
+      </div>
+
+    </main>

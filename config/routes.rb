@@ -7,8 +7,14 @@ Rails.application.routes.draw do
   get 'movies/:id/reviews' => 'reviews#create'
   root 'movies#index'
 
+  #put '/admin/users/:id' => 'admin::users#upgrade'  -> 넘나 귀찮은 방법이다.
+
   namespace :admin do
-    resources :users
+    resources :users do
+        put :upgrade
+        put :downgrade
+    end
+    resources :movies
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

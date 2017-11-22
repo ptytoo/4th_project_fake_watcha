@@ -1,6 +1,50 @@
-<h1>유저 관리 페이지</h1>
-<% @users.each do |user|%>
-  <%= user.email%> | <%= user.role%>
-  <%= link_to '[삭제]', admin_user_path(user), method: 'delete', data: {confirm: "삭제하시겠습니까?"}%> |
-  <%= link_to '[승급]', admin_user_path(user), method: :put, data: {confirm: "관리자로 승급하시겠습니까?"} %><br>
-<%end%>
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/users">유저 관리 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= admin_movies_path %>">영화 관리</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">게시판 관리</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">블로그 관리</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+        <h1>유저 관리</h1>
+        <h2>유저 목록</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>EMAIL</th>
+                <th>ROLE</th>
+                <th>MANAGEMENT</th>
+                <th>DELETE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user|%>
+              <tr>
+                <td><%= user.id%></td>
+                <td><%= user.email%></td>
+                <td><%= user.role%></td>
+                <% unless user.admin?%>
+                <td><%= link_to '[승급]', admin_user_upgrade_path(user), method: :put, data: {confirm: "관리자로 승급하시겠습니까?"} %></td>
+                <% else %>
+                <td><%= link_to '[양민]', admin_user_downgrade_path(user), method: :put, data: {confirm: "양민 ㄱㄱ?"} %></td>
+                <%end%>
+                <td><%= link_to '[삭제]', admin_user_path(user), method: 'delete', data: {confirm: "삭제하시겠습니까?"}%></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </main>

@@ -8,10 +8,18 @@ class Admin::UsersController < Admin::ApplicationController
     redirect_to admin_users_path
   end
 
-  def update
-    @user = User.find(params[:id])
+  def upgrade
+    @user = User.find(params[:user_id])
     @user.update(
       role: "admin"
+    )
+    redirect_to admin_users_path
+  end
+
+  def downgrade
+    @user = User.find(params[:user_id])
+    @user.update(
+      role: "regular"
     )
     redirect_to admin_users_path
   end
