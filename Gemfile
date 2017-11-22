@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'faker'
 gem 'rails_12factor', group: :production
 group :production do
   gem 'pg', '0.21.0'

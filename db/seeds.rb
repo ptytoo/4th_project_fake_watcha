@@ -6,20 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+30.times do
+  User.create(
+    email: Faker::Internet.email,
+    password: "123123",
+    password_confirmation: "123123"
+  )
+end
+
 User.create([
   {
     email: "admin@asdf.com",
     password: "123123",
     password_confirmation: "123123",
     role: "admin"
-  },
-  {
-    email: "regular@asdf.com",
-    password: "123123",
-    password_confirmation: "123123",
-    role: "regular"
   }
-
 ])
 
 require 'csv'

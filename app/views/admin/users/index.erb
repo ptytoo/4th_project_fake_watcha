@@ -1,6 +1,6 @@
 <h1>유저 관리 페이지</h1>
 <% @users.each do |user|%>
-  <%= user.email%><br>
-  <%= user.role%><br>
-  <%= link_to '삭제', admin_user_path(user), method: 'delete'%><br>
+  <%= user.email%> | <%= user.role%>
+  <%= link_to '[삭제]', admin_user_path(user), method: 'delete', data: {confirm: "삭제하시겠습니까?"}%> |
+  <%= link_to '[승급]', admin_user_path(user), method: :put, data: {confirm: "관리자로 승급하시겠습니까?"} %><br>
 <%end%>
