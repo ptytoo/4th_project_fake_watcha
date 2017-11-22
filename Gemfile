@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails_12factor', group: :production
 group :production do
   gem 'pg', '0.21.0'
+  gem 'simple_form', '3.5.0'
 end
 gem 'cancancan', '~> 2.0'
 gem 'carrierwave', '~> 1.0'
