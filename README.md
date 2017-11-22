@@ -1,4 +1,4 @@
-###유저를 admin, regular로 나누기
+### 유저를 admin, regular로 나누기
 ~~~shell
     rails g migration add_role_to_users role:string
     rake db:migrate
@@ -25,7 +25,7 @@ authentication & authorization가 중요하다
     #controller 파일에 load_and_authorize_resource추가
 ~~~
 
-###heroku 배포
+### heroku 배포
 ~~~shell
     brew install libpq
     brew install postgresql
