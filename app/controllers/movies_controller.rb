@@ -1,20 +1,27 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource
+  #before_action :authenticate_user!, except: [:index, :show]
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-
+  #before_action :check_admin, only: [:edit,:update,:destroy]
+  
   # GET /movies
   # GET /movies.json
   def index
     #@movies = Movie.all
     @movies = Movie.order(:updated_at).reverse_order.page params[:page]
+    #authorize! :read, Movie
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @sum = 0
-    @movie = Movie.find(params[:id])
-    @avg = @movie.reviews.collect {|r| r.rating.to_i}.sum / @movie.reviews.count.to_f
+    # @sum = 0
+    # @movie = Movie.find(params[:id])
+    # @avg = 0
+    # 한줄로 평균점수 구하기 @avg = @movie.reviews.collect {|r| r.rating.to_i}.sum / @movie.reviews.count.to_f
+
+    #authorize! :read, Movie
+
     #puts @rs
     # @rs.each do |r|
     #   @sum = @sum + r.rating.to_i
@@ -25,14 +32,18 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    #authorize! :create, Movie
   end
 
   # GET /movies/1/edit
   def edit
-    unless current_user.email == @movie.user.email
-      flash[:notice] = "작성자만 수정할 수 있습니다."
-      redirect_to movie_path(@movie)
-    end
+    # if @movie.user.role == 'admin'
+    #   unless current_user.email == @movie.user.email
+    #     flash[:notice] = "작성자만 수정할 수 있습니다."
+    #     redirect_to movie_path(@movie)
+    #   end
+    # end
+    #authorize! :update, Movie
   end
 
   # POST /movies
@@ -49,6 +60,7 @@ class MoviesController < ApplicationController
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
+    #authorize! :create, Movie
   end
 
   # PATCH/PUT /movies/1
@@ -63,6 +75,7 @@ class MoviesController < ApplicationController
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
+    #authorize! :update, Movie
   end
 
   # DELETE /movies/1
@@ -73,9 +86,16 @@ class MoviesController < ApplicationController
       format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
       format.json { head :no_content }
     end
+    #authorize! :destroy, Movie
   end
 
   private
+
+    def check_admin
+      unless current_user.admin?
+        redirect_to root_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])
