@@ -5,7 +5,7 @@ gem 'aws-sdk-rails'
 gem "mini_magick"
 gem "fog-aws"
 gem 'faker'
-gem 'rails_12factor', group: :production
+#gem 'rails_12factor', group: :production
 # group :production do
 #   gem 'pg', '0.21.0'
 # end
