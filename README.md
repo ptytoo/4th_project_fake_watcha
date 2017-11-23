@@ -76,7 +76,7 @@ public/uploads/movie/image_url/1에 image.rb파일 생성하고 아래 내용 �
 
     #PhotoUploader에서 주석인 부분 수정
     #서버 다시 돌리고 new post해준 뒤 aws bucket확인하면 thumb인지 뭔지 생김
-~~~
+~~~  
 Photo_uploader.rb에서
 ~~~ruby
     version :small do
