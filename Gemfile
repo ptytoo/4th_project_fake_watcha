@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
-
+gem 'trix'
 gem 'aws-sdk-rails'
 gem "mini_magick"
 gem "fog-aws"
 gem 'faker'
 gem 'rails_12factor', group: :production
-group :production do
-  gem 'pg', '0.21.0'
-end
+# group :production do
+#   gem 'pg', '0.21.0'
+# end
 gem 'simple_form', '3.5.0'
 gem 'cancancan', '~> 2.0'
 gem 'carrierwave', '~> 1.0'

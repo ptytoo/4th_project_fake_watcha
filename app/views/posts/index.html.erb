@@ -9,6 +9,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
+      <th scope="col">Content</th>
       <th scope="col">Image</th>
       <th scope="col">User_id</th>
       <th scope="col">Show</th>
@@ -21,8 +22,8 @@
       <tr>
         <td><%= post.id %></td>
         <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= post.photo %></td>
+        <td><%= post.content.html_safe %></td>
+        <td><%= image_tag post.photo, width: "100" %></td>
         <td><%= post.user %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
