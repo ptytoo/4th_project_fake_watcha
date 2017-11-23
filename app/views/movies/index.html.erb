@@ -9,7 +9,6 @@
         <img class="card-img-top" src="<%= movie.image_url%>" alt="Card image cap">
         <div class="card-body">
           <h4 class="card-title"><%= movie.title %></h4>
-          <p class="card-text"><%= movie.user.email if movie.user%></p>
           <%= link_to '보기', movie_path(movie), class: "btn btn-primary"%>
           <!--<a href="#" class="btn btn-primary">보기</a>-->
         </div>
